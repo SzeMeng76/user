@@ -97,6 +97,7 @@
                 <div class="w-full max-w-[280px] sm:max-w-[240px] aspect-square rounded-xl overflow-hidden bg-white p-2">
                   <img :src="qrImageUrl" alt="QR Code" class="w-full h-full object-contain" />
                 </div>
+                <div class="mt-3 text-sm theme-text-muted">{{ paymentGuideTip }}</div>
                 <div v-if="qrUsingPayLinkFallback" class="mt-3 text-xs theme-text-muted">
                   {{ t('payment.qrFallbackHint') }}
                 </div>
