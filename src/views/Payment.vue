@@ -665,7 +665,12 @@ const interactionLabel = computed(() => {
 const interactionMode = computed(() => String(paymentResult.value?.interaction_mode || '').toLowerCase())
 const paymentResultTitle = computed(() => interactionMode.value === 'redirect' ? t('payment.resultRedirectTitle') : t('payment.resultTitle'))
 const paymentGuideTitle = computed(() => interactionMode.value === 'redirect' ? t('payment.redirectTitle') : t('payment.qrTitle'))
-const paymentGuideTip = computed(() => interactionMode.value === 'redirect' ? t('payment.redirectTip') : t('payment.qrTip'))
+const paymentGuideTip = computed(() => {
+  if (interactionMode.value === 'redirect') return t('payment.redirectTip')
+  if (paymentProviderType.value === 'tokenpay') return t('payment.qrCryptoTip')
+  if (paymentProviderType.value === 'globepay' && paymentChannelType.value !== 'wechat') return t('payment.qrAlipayTip')
+  return t('payment.qrTip')
+})
 
 const showPayLink = computed(() => {
   return interactionMode.value === 'redirect' || Boolean(payLink.value)
