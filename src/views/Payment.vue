@@ -101,6 +101,12 @@
                 <div v-if="qrUsingPayLinkFallback" class="mt-3 text-xs theme-text-muted">
                   {{ t('payment.qrFallbackHint') }}
                 </div>
+                <button v-if="payLink"
+                  type="button"
+                  @click="handleOpenPayLink"
+                  class="mt-4 theme-btn-inline-md border theme-btn-secondary font-semibold">
+                  {{ t('payment.openPayLink') }}
+                </button>
               </div>
 
               <div v-else class="theme-surface-soft border rounded-2xl p-6">
