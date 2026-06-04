@@ -572,7 +572,7 @@ const readRouteQueryFlag = (key: string): boolean => {
   return value === '1' || value === 'true' || value === 'yes'
 }
 
-const paymentReturnMarkers = ['epay_return', 'alipay_return', 'wechat_return', 'epusdt_return', 'bepusdt_return', 'tokenpay_return', 'okpay_return', 'pp_return', 'stripe_return', 'globepay_return']
+const paymentReturnMarkers = ['epay_return', 'alipay_return', 'wechat_return', 'epusdt_return', 'bepusdt_return', 'tokenpay_return', 'okpay_return', 'pp_return', 'stripe_return', 'globepay_return', 'binancepay_return']
 const rechargeBizType = computed(() => readRouteQueryValue('biz_type').toLowerCase())
 const rechargeNoQuery = computed(() => {
   const rechargeNo = readRouteQueryValue('recharge_no')
@@ -1591,6 +1591,7 @@ const channelTypeLabel = (value?: string) => {
     qqpay: t('payment.channelTypes.qqpay'),
     paypal: t('payment.channelTypes.paypal'),
     stripe: t('payment.channelTypes.stripe'),
+    binancepay: t('payment.channelTypes.binancepay'),
     usdt: t('payment.channelTypes.usdt'),
     'usdt-trc20': t('payment.channelTypes.usdtTrc20'),
     'usdc-trc20': t('payment.channelTypes.usdcTrc20'),
