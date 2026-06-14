@@ -863,6 +863,11 @@ const messages = {
             copied: '已复制',
             copyFailed: '复制失败，请重试',
             qrCodeLabel: '二维码内容',
+            walletAddress: '钱包地址',
+            cryptoAmount: '链上应付数量',
+            cryptoChain: '链/网络',
+            cryptoToken: '支付币种',
+            copyWalletAddress: '复制钱包地址',
             qrTitle: '请使用扫码支付',
             qrTip: '打开支付应用扫码完成支付。微信用户可截图后在微信中扫码支付。',
             qrCryptoTip: '使用手机扫码或点击下方按钮打开支付链接，在支付页面查看收款地址和金额后完成转账。',
@@ -2012,6 +2017,11 @@ const messages = {
             copied: '已複製',
             copyFailed: '複製失敗，請重試',
             qrCodeLabel: '二維碼內容',
+            walletAddress: '錢包地址',
+            cryptoAmount: '鏈上應付數量',
+            cryptoChain: '鏈/網路',
+            cryptoToken: '支付幣種',
+            copyWalletAddress: '複製錢包地址',
             qrTitle: '請使用掃碼支付',
             qrTip: '打開支付應用掃碼完成支付。微信用戶可截圖後在微信中掃碼支付。',
             qrCryptoTip: '使用手機掃碼或點擊下方按鈕開啟支付連結，在支付頁面查看收款地址和金額後完成轉帳。',
@@ -3120,6 +3130,11 @@ const messages = {
             copied: 'Copied',
             copyFailed: 'Copy failed, please try again',
             qrCodeLabel: 'QR content',
+            walletAddress: 'Wallet address',
+            cryptoAmount: 'On-chain amount due',
+            cryptoChain: 'Chain / network',
+            cryptoToken: 'Payment token',
+            copyWalletAddress: 'Copy wallet address',
             qrTitle: 'Scan to pay',
             qrTip: 'Open your payment app and scan to complete payment. WeChat users can screenshot and scan in WeChat.',
             qrCryptoTip: 'Scan the QR code with your phone or tap the button below to open the payment link. You will see the wallet address and amount on the payment page.',
@@ -3330,7 +3345,7 @@ const messages = {
 
 const supportedLocales = ['zh-CN', 'zh-TW', 'en-US']
 
-function detectLocale(): string {
+export function detectLocale(): string {
     const saved = localStorage.getItem('locale')
     if (saved && supportedLocales.includes(saved)) return saved
 
