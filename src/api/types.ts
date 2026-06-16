@@ -188,6 +188,209 @@ export interface AffiliateWithdrawApplyPayload {
     account: string
 }
 
+export interface ResellerProfileSummaryData {
+    id: number
+    status: string
+    settlement_status: string
+    created_at: string
+}
+
+export interface ResellerManagementProfileData {
+    id: number
+    status: string
+    apply_reason?: string
+    reject_reason?: string
+    default_markup_percent: string
+    max_markup_percent: string
+    settlement_status: string
+    reviewed_at?: string
+    created_at: string
+    updated_at: string
+}
+
+export interface ResellerDomainData {
+    id: number
+    domain: string
+    type: string
+    verification_token?: string
+    verification_status: string
+    status: string
+    is_primary: boolean
+    verified_at?: string
+    created_at: string
+    updated_at: string
+}
+
+export interface ResellerManagementSnapshotData {
+    opened: boolean
+    can_apply: boolean
+    profile?: ResellerManagementProfileData
+    domains: ResellerDomainData[]
+}
+
+export interface ResellerApplyPayload {
+    reason?: string
+}
+
+export interface ResellerCustomDomainPayload {
+    domain: string
+}
+
+export interface ResellerLocalizedText {
+    'zh-CN': string
+    'zh-TW': string
+    'en-US': string
+}
+
+export interface ResellerSiteConfigPayload {
+    site_name: string
+    logo?: string
+    favicon?: string
+    announcement?: {
+        enabled: boolean
+        type: string
+        title: ResellerLocalizedText
+        content: ResellerLocalizedText
+    }
+    support?: {
+        telegram?: string
+        whatsapp?: string
+        email?: string
+        support_url?: string
+    }
+    seo?: {
+        title: ResellerLocalizedText
+        keywords: ResellerLocalizedText
+        description: ResellerLocalizedText
+        default_og_image?: string
+    }
+    footer_links?: Array<{ name: ResellerLocalizedText; url: string }>
+    nav_config?: {
+        builtin: Record<string, boolean>
+        custom_items: Array<{ name: ResellerLocalizedText; url: string }>
+    }
+    theme?: {
+        primary_color?: string
+        accent_color?: string
+        surface_color?: string
+    }
+}
+
+export interface ResellerSiteConfigData extends ResellerSiteConfigPayload {
+    id: number
+    updated_at: string
+}
+
+export interface ResellerSiteConfigSnapshotData {
+    opened: boolean
+    can_edit: boolean
+    config?: ResellerSiteConfigData
+}
+
+export type ResellerPricingMode = 'inherit' | 'markup_percent' | 'fixed_markup' | 'fixed_price'
+
+export interface ResellerProductSettingData {
+    id?: number
+    product_id: number
+    sku_id: number
+    is_listed: boolean
+    pricing_mode: ResellerPricingMode | string
+    markup_percent: string
+    fixed_markup_amount: string
+    fixed_price_amount: string
+    effective_price_amount?: string
+    rule_source?: string
+    sort_order: number
+    updated_at?: string
+}
+
+export interface ResellerProductSettingSKUData {
+    id: number
+    sku_code: string
+    spec_values: Record<string, string>
+    base_price_amount: string
+    is_active: boolean
+    setting?: ResellerProductSettingData
+    effective_price_amount?: string
+}
+
+export interface ResellerProductSettingProductData {
+    id: number
+    slug: string
+    title: Record<string, string>
+    price_amount: string
+    is_active: boolean
+}
+
+export interface ResellerProductSettingDetailData {
+    product: ResellerProductSettingProductData
+    product_setting?: ResellerProductSettingData
+    skus: ResellerProductSettingSKUData[]
+}
+
+export interface ResellerProductSettingPayloadItem {
+    sku_id: number
+    is_listed: boolean
+    pricing_mode: ResellerPricingMode | string
+    markup_percent: string
+    fixed_markup_amount: string
+    fixed_price_amount: string
+    sort_order: number
+}
+
+export interface ResellerProductSettingUpdatePayload {
+    settings: ResellerProductSettingPayloadItem[]
+}
+
+export interface ResellerBalanceData {
+    id: number
+    currency: string
+    status: string
+    available_amount: string
+    locked_amount: string
+    negative_amount: string
+    updated_at: string
+}
+
+export interface ResellerLedgerData {
+    id: number
+    order_id?: number
+    type: string
+    amount: string
+    currency: string
+    status: string
+    available_at?: string
+    withdraw_request_id?: number
+    created_at: string
+}
+
+export interface ResellerWithdrawData {
+    id: number
+    amount: string
+    currency: string
+    channel: string
+    account: string
+    status: string
+    reject_reason?: string
+    processed_at?: string
+    created_at: string
+}
+
+export interface ResellerDashboardData {
+    opened: boolean
+    profile?: ResellerProfileSummaryData
+    balances?: ResellerBalanceData[]
+    withdraw_enabled: boolean
+    withdraw_disabled_reason?: string
+}
+
+export interface ResellerWithdrawApplyPayload {
+    amount: string
+    currency: string
+    channel: string
+    account: string
+}
+
 export interface CreatePaymentPayload {
     order_no: string
     channel_id?: number
