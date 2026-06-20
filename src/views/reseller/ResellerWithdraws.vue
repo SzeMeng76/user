@@ -39,10 +39,10 @@
             <SelectItem v-for="currency in balanceCurrencies" :key="currency" :value="currency">{{ currency }}</SelectItem>
           </SelectContent>
         </Select>
-        <Input v-else v-model.trim="form.currency" :placeholder="t('personalCenter.reseller.withdrawCurrencyPlaceholder')" :disabled="!withdrawEnabled || submittingWithdraw" />
+        <Input v-else model-value="" readonly disabled :placeholder="t('resellerConsole.withdraws.noCurrency')" />
         <Input v-model.trim="form.channel" :placeholder="t('personalCenter.reseller.withdrawChannelPlaceholder')" :disabled="!withdrawEnabled || submittingWithdraw" />
         <Input v-model.trim="form.account" :placeholder="t('personalCenter.reseller.withdrawAccountPlaceholder')" :disabled="!withdrawEnabled || submittingWithdraw" />
-        <Button type="submit" :disabled="submittingWithdraw || !withdrawEnabled || amountError">
+        <Button type="submit" :disabled="submittingWithdraw || !withdrawEnabled || amountError || balanceCurrencies.length === 0">
           {{ submittingWithdraw ? t('personalCenter.reseller.withdrawing') : t('personalCenter.reseller.withdrawSubmit') }}
         </Button>
       </form>
@@ -168,7 +168,9 @@ const onSubmit = async () => {
     form.account = ''
     alert.value = { level: 'success', message: t('personalCenter.common.saveSuccess') }
   } catch (err) {
-    alert.value = { level: 'error', message: t('personalCenter.common.saveFailed') }
+    // 透传后端细分错误（余额不足/币种不可用/账户冻结等），失败兜底通用文案。
+    const message = err instanceof Error && err.message ? err.message : t('personalCenter.common.saveFailed')
+    alert.value = { level: 'error', message }
   }
 }
 
