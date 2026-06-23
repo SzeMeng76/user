@@ -115,7 +115,7 @@
                     <span v-if="walletAddressCopied" class="text-xs text-success">{{ t('payment.copied') }}</span>
                   </div>
                 </div>
-                <button v-if="payLink"
+                <button v-if="showPayLink"
                   type="button"
                   @click="handleOpenPayLink"
                   class="mt-4 theme-btn-inline-md border theme-btn-secondary font-semibold">
